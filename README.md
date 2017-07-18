@@ -1,8 +1,8 @@
-#Python Microservices
+# Python Microservices
 
 This project chains 3 Python web services together in a style similar to modern web-based microservices. Each of the web instances is created using a different Python web framework: Django, Flask, and Pyramid.
 
-#Project Structure Breakdown
+# Project Structure Breakdown
 * django/
     * All the django project components
 * flask/
