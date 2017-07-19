@@ -122,3 +122,8 @@ STATICFILES_DIRS = [
     os.path.join(BASE_DIR, "MainCupcakeAssembler/static"),
     os.path.join(BASE_DIR, "MainCupcakeAssembler/react_frontend/dist")
 ]
+
+#FONTS
+
+FONTS = '/fonts/'
+FONTS_ROOT = os.path.join(BASE_DIR, 'fonts') 

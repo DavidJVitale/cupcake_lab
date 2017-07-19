@@ -12,12 +12,16 @@
   "dependencies": {
     "@types/react": "^15.0.22",
     "@types/react-dom": "^15.5.0",
-    "css-loader": "^0.28.0",
+    "css-loader": "^0.28.4",
+    "file-loader": "^0.11.2",
     "less": "^2.7.2",
-    "less-loader": "^4.0.3",
+    "less-loader": "^4.0.5",
     "react": "^15.5.4",
     "react-dom": "^15.5.4",
+    "react-widgets": "^3.4.8",
+    "react-widgets-webpack": "^0.1.0",
     "style-loader": "^0.16.1",
+    "url-loader": "^0.5.9",
     "whatwg-fetch": "^2.0.3"
   },
   "devDependencies": {
