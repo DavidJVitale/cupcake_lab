@@ -7,7 +7,7 @@ import "../styles/CupcakeAssembler.less"
 
 const NO_INFO_MSG : string = "No information at this time."
 
-export interface CupcakeAssemblerProps { CupcakeBodies : string[],
+export interface CupcakeAssemblerProps { CupcakeBodies : any[],
                                          SelectedBody : string,
                                          BodyDetails: string,
                                          CupcakeFrostings: string[],
@@ -20,7 +20,7 @@ export interface CupcakeAssemblerProps { CupcakeBodies : string[],
 export class CupcakeAssembler extends React.Component<undefined, CupcakeAssemblerProps>{
     constructor(props : any){
         super(props)
-        this.state = { CupcakeBodies : ["one", "two"],
+        this.state = { CupcakeBodies : [],
                        SelectedBody : "",
                        BodyDetails : NO_INFO_MSG,
                        CupcakeFrostings : ["a", "b"],
@@ -35,8 +35,22 @@ export class CupcakeAssembler extends React.Component<undefined, CupcakeAssemble
         
         fetch("/api/cupcakebodies").then((response) => {
             response.json().then((data : any ) => {
-                console.log(data)})})
-        }
+                this.setState({ BodyDetails : "CupcakeBody Endpoint Running!"})
+                this.setState({
+                    CupcakeBodies : this.jsonToCupcakeBodies(data)})})})}
+
+    jsonToCupcakeBodies(data){
+        return JSON.parse(data).map((item) => { return item["fields"]})}
+
+    toNameArray(data : any[], mapName : string) : string[]{
+        return data.map((item) => { return item[mapName] })}
+
+    imageUrlOfSelectedBody(){
+        var urlBase = "http://127.0.0.1:8000"
+        for(var i=0; i<this.state.CupcakeBodies.length; i++){
+            if(this.state.CupcakeBodies[i].body_name == this.state.SelectedBody){
+                return urlBase + this.state.CupcakeBodies[i].body_url}}
+        return ""}
 
     handleBodyChange(SelectedBody){
         this.setState({ SelectedBody })}
@@ -50,7 +64,7 @@ export class CupcakeAssembler extends React.Component<undefined, CupcakeAssemble
     render() {
         return (<div className="CupcakeBodyGet">
             <h1> Cupcake Body Microservice </h1>
-            <DropdownList defaultValue={this.state.SelectedBody} data={this.state.CupcakeBodies} onChange={this.handleBodyChange}/>
+            <DropdownList defaultValue={this.state.SelectedBody} data={this.toNameArray(this.state.CupcakeBodies, "body_name")} onChange={this.handleBodyChange}/>
             <b> Details: </b> { this.state.BodyDetails }
             <hr></hr>
             <h1> Cupcake Frosting Microservice </h1>
@@ -61,5 +75,5 @@ export class CupcakeAssembler extends React.Component<undefined, CupcakeAssemble
             <DropdownList defaultValue={this.state.SelectedTopping} data={this.state.CupcakeToppings} onChange={this.handleToppingChange}/>
             <b> Details </b> { this.state.ToppingDetails }
             <hr></hr>
-            <img src="http://127.0.0.1:8000/static/carrot.png" height="200" width="200"/>
+            <img src={this.imageUrlOfSelectedBody()} height="200" width="200"/>
           </div>)}}
