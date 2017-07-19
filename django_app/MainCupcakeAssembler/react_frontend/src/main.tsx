@@ -1,15 +1,13 @@
 import * as React from "react"
 import * as ReactDOM from "react-dom"
 
-import { Hello } from "./components/Hello"
-import { CupcakeBodyGet } from "./components/CupcakeBodyGet" 
+import { CupcakeAssembler } from "./components/CupcakeAssembler" 
 
 import "./styles/main.less"
 
 ReactDOM.render(
         <div>
-        <Hello compiler="Python" framework="Typescript" styler="React" />
-        <CupcakeBodyGet/>
+        <CupcakeAssembler/>
         </div>,
     document.getElementById("example")
 );
