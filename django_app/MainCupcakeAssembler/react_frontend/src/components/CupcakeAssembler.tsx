@@ -31,7 +31,12 @@ export class CupcakeAssembler extends React.Component<undefined, CupcakeAssemble
                        ToppingDetails : NO_INFO_MSG }
         this.handleBodyChange = this.handleBodyChange.bind(this)
         this.handleFrostingChange = this.handleFrostingChange.bind(this)
-        this.handleToppingChange = this.handleToppingChange.bind(this)}
+        this.handleToppingChange = this.handleToppingChange.bind(this)
+        
+        fetch("/api/cupcakebodies").then((response) => {
+            response.json().then((data : any ) => {
+                console.log(data)})})
+        }
 
     handleBodyChange(SelectedBody){
         this.setState({ SelectedBody })}

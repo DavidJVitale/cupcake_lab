@@ -36,16 +36,19 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'MainCupcakeAssembler',
+    'corsheaders'
 ]
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
+    'corsheaders.middleware.CorsMiddleware',
     'django.middleware.common.CommonMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
-    'django.middleware.clickjacking.XFrameOptionsMiddleware',
+    'django.middleware.clickjacking.XFrameOptionsMiddleware'
 ]
 
 ROOT_URLCONF = 'MainCupcakeAssembler.urls'
@@ -127,3 +130,8 @@ STATICFILES_DIRS = [
 
 FONTS = '/fonts/'
 FONTS_ROOT = os.path.join(BASE_DIR, 'fonts') 
+
+# CORS BROWSER ERROR STUFF:
+CORS_ORIGIN_ALLOW_ALL = True
+
+

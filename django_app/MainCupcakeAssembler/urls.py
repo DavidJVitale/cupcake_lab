@@ -13,12 +13,21 @@ Including another URLconf
     1. Import the include() function: from django.conf.urls import url, include
     2. Add a URL to urlpatterns:  url(r'^blog/', include('blog.urls'))
 """
+
+import sys, os
+
 from django.conf.urls import url
 from django.contrib import admin
 
+#Allow files from the 'endpoints' folder to be imported
+from settings import BASE_DIR
+sys.path.insert(0, os.path.join(BASE_DIR, 'MainCupcakeAssembler/endpoints'))
+
+from cupcake_bodies import get_bodies
 from . import views
 
 urlpatterns = [
     url(r'^admin/', admin.site.urls),
-    url(r'^$', views.index, name='index')
+    url(r'^$', views.index, name='index'),
+    url(r'^api/cupcakebodies/', get_bodies, name='bodies')
 ]
