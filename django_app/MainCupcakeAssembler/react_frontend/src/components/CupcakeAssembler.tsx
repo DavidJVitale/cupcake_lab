@@ -1,7 +1,7 @@
 import * as React from "react"
 import 'whatwg-fetch'
 
-import { DropdownList } from "react-widgets" 
+import { DropdownList } from "react-widgets"
 
 import "../styles/CupcakeAssembler.less"
 
@@ -56,4 +56,5 @@ export class CupcakeAssembler extends React.Component<undefined, CupcakeAssemble
             <DropdownList defaultValue={this.state.SelectedTopping} data={this.state.CupcakeToppings} onChange={this.handleToppingChange}/>
             <b> Details </b> { this.state.ToppingDetails }
             <hr></hr>
+            <img src="http://127.0.0.1:8000/static/carrot.png" height="200" width="200"/>
           </div>)}}
