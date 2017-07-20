@@ -6,24 +6,24 @@ VANILLA_BODY = "vanilla"
 CHOCOLATE_BODY = "chocolate"
 CARROT_BODY = "carrot"
 
-CHOCOLATE_FROSTING = {"name" : "chocolate",
+CHOCOLATE_FROSTING = {"name" : "Chocolate",
                       "image_url" : "static/chocolate.png",
                       "info" : "Pairs well with Chocolate and Vanilla bodies",
                       "pub_date" : datetime(1995, 3, 11)}
 
-VANILLA_FROSTING = { "name" : "vanilla",
+VANILLA_FROSTING = { "name" : "Vanilla",
                      "image_url" : "static/vanilla.png",
                      "info" : "A classic! Goes well with all cupcake bodies",
                      "pub_date" : datetime(1995, 3, 11)}
 
-STRAWBERRY_FROSTING = { "name" : "strawberry",
-                        "image_url" : "static/vanilla.png",
+STRAWBERRY_FROSTING = { "name" : "Strawberry",
+                        "image_url" : "static/strawberry.png",
                         "info" : "Pairs well with Vanilla bodies",
                         "pub_date" : datetime(1995, 3, 11)}
 
-NEON_FROSTING = { "name" : "neon",
+NEON_FROSTING = { "name" : "Neon",
                   "image_url" : "static/neonblue.png",
-                  "info" : "Pairs well with Vanilla bodies",
+                  "info" : "Pairs well with Vanilla bodies. May contain radium",
                   "pub_date" : datetime(1995, 3, 11)}
 
 ALL_FROSTINGS = [ CHOCOLATE_FROSTING,

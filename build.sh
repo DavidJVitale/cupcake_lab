@@ -33,6 +33,7 @@ run_all_python_web(){
 # killall 3 python web framework instances
 kill_all_python_web(){
     sudo killall python
+    sudo killall flask
 }
 
 # prints the options for controlling recompilation
