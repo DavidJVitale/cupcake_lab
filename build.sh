@@ -22,7 +22,12 @@ compile_front_end(){
 # runs all 3 python web frameworks
 run_all_python_web(){
     cd $dir_of_script
+    #Run Django
     sudo python ./django_app/manage.py runserver &
+    #Run Flask
+    cd flask_app
+    export FLASK_APP=server.py
+    flask run &
 }
 
 # killall 3 python web framework instances

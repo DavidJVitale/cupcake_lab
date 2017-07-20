@@ -45,6 +45,12 @@ export class CupcakeAssembler extends React.Component<undefined, CupcakeAssemble
     toNameArray(data : any[], mapName : string) : string[]{
         return data.map((item) => { return item[mapName] })}
 
+    infoOfSelectedBody(SelectedBody){
+        for(var i=0; i<this.state.CupcakeBodies.length; i++){
+            if(this.state.CupcakeBodies[i].body_name == SelectedBody){
+                return this.state.CupcakeBodies[i].body_info}}
+        return NO_INFO_MSG}
+
     imageUrlOfSelectedBody(){
         var urlBase = "http://127.0.0.1:8000"
         for(var i=0; i<this.state.CupcakeBodies.length; i++){
@@ -53,7 +59,8 @@ export class CupcakeAssembler extends React.Component<undefined, CupcakeAssemble
         return ""}
 
     handleBodyChange(SelectedBody){
-        this.setState({ SelectedBody })}
+        this.setState({ SelectedBody })
+        this.setState({ BodyDetails : this.infoOfSelectedBody(SelectedBody)})}
 
     handleFrostingChange(SelectedFrosting){
         this.setState({ SelectedFrosting })}
