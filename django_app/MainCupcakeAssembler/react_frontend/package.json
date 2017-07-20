@@ -1,7 +1,7 @@
 {
-  "name": "boilerplate_frontend",
+  "name": "cupcake_frontend",
   "version": "1.0.0",
-  "description": "Personal boilerplate setup, React with Typescript and webpack frontend",
+  "description": "Hacked together frontend for visualizing microservices",
   "main": "index.tsx",
   "scripts": {
     "postinstall": "npm link shared",

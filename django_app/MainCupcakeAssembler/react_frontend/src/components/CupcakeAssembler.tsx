@@ -1,3 +1,5 @@
+//Author: David Vitale
+
 import * as React from "react"
 import 'whatwg-fetch'
 
@@ -38,7 +40,9 @@ export class CupcakeAssembler extends React.Component<undefined, CupcakeAssemble
             response.json().then((data : any ) => {
                 this.setState({ BodyDetails : "CupcakeBody Endpoint Running!"})
                 this.setState({
-                    CupcakeBodies : this.jsonToCupcakeBodies(data)})})})}
+                    CupcakeBodies : this.jsonToCupcakeBodies(data)})})})
+            .catch((error : any) => {
+                this.setState({ BodyDetails : "Some Error Occured: " + error.message})})}
 
     jsonToCupcakeBodies(data){
         return JSON.parse(data).map((item) => { return item["fields"]})}
@@ -86,7 +90,6 @@ export class CupcakeAssembler extends React.Component<undefined, CupcakeAssemble
 
     imageUrlOfSelectedTopping(){
         var urlBase = LOCALHOST+":6500"
-        console.log(this.state.CupcakeToppings)
         for(var i=0; i<this.state.CupcakeToppings.length; i++){
             if(this.state.CupcakeToppings[i].name == this.state.SelectedTopping){
                 return urlBase + this.state.CupcakeToppings[i].url}}
@@ -109,7 +112,9 @@ export class CupcakeAssembler extends React.Component<undefined, CupcakeAssemble
         fetch(url).then((response) => {
             response.json().then((data : any) => {
                 this.setState({
-                    CupcakeFrostings : data })})})}
+                    CupcakeFrostings : data })})})
+        .catch((error : any) => {
+            this.setState({ FrostingDetails : "Some Error Occured: " + error.message})})}
 
     handleFrostingChange(SelectedFrosting){
         this.setState({ SelectedFrosting })
@@ -123,7 +128,9 @@ export class CupcakeAssembler extends React.Component<undefined, CupcakeAssemble
         for(var i=0; i<toppings.length; i++){
             fetch("http://127.0.0.1:6500/api/toppings/"+toppings[i]).then((response) => {
                 response.json().then((data : any) => {
-                    this.setState({CupcakeToppings : this.state.CupcakeToppings.concat(data)})})})}}
+                    this.setState({CupcakeToppings : this.state.CupcakeToppings.concat(data)})})})
+        .catch((error : any) => {
+                this.setState({ ToppingDetails : "Some Error Occured: " + error.message})})}}
 
     handleToppingChange(SelectedTopping){
         this.setState({ SelectedTopping })
