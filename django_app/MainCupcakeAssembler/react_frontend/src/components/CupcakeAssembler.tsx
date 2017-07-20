@@ -14,7 +14,7 @@ export interface CupcakeAssemblerProps { CupcakeBodies : any[],
                                          CupcakeFrostings: any[],
                                          SelectedFrosting: string,
                                          FrostingDetails: string,
-                                         CupcakeToppings: string[],
+                                         CupcakeToppings: any[],
                                          SelectedTopping: string,
                                          ToppingDetails: string }
 
@@ -44,8 +44,6 @@ export class CupcakeAssembler extends React.Component<undefined, CupcakeAssemble
         return JSON.parse(data).map((item) => { return item["fields"]})}
 
     toNameArray(data : any[], mapName : string) : string[]{
-        console.log("toNameArrayCalled: " + mapName)
-        console.log(data)
         return data.map((item) => { return item[mapName] })}
 
     infoOfSelectedBody(SelectedBody){
@@ -56,10 +54,21 @@ export class CupcakeAssembler extends React.Component<undefined, CupcakeAssemble
 
     infoOfSelectedFrosting(SelectedFrosting){
         for(var i=0; i<this.state.CupcakeFrostings.length; i++){
-            console.log(this.state.CupcakeFrostings[i])
             if(this.state.CupcakeFrostings[i].name == SelectedFrosting){
                 return this.state.CupcakeFrostings[i].info}}
         return NO_INFO_MSG}
+
+    infoOfSelectedTopping(SelectedTopping){
+        for(var i=0; i<this.state.CupcakeToppings.length; i++){
+            if(this.state.CupcakeToppings[i].name == SelectedTopping){
+                return this.state.CupcakeToppings[i].details}}
+        return NO_INFO_MSG}
+
+    appropriateToppingsForFrosting(someFrosting){
+        for(var i=0; i<this.state.CupcakeFrostings.length; i++){
+            if(this.state.CupcakeFrostings[i].name == someFrosting){
+                return this.state.CupcakeFrostings[i].appropriate_toppings}}
+        return []}
 
     imageUrlOfSelectedBody(){
         var urlBase = LOCALHOST+":8000"
@@ -75,27 +84,50 @@ export class CupcakeAssembler extends React.Component<undefined, CupcakeAssemble
                 return urlBase + this.state.CupcakeFrostings[i].image_url}}
         return ""}
 
+    imageUrlOfSelectedTopping(){
+        var urlBase = LOCALHOST+":6500"
+        console.log(this.state.CupcakeToppings)
+        for(var i=0; i<this.state.CupcakeToppings.length; i++){
+            if(this.state.CupcakeToppings[i].name == this.state.SelectedTopping){
+                return urlBase + this.state.CupcakeToppings[i].url}}
+        return ""}
 
     handleBodyChange(SelectedBody){
         this.setState({ SelectedBody })
         this.setState({ BodyDetails : this.infoOfSelectedBody(SelectedBody)})
+
         this.setState({ SelectedFrosting : "" })
+        this.setState({ FrostingDetails : NO_INFO_MSG })
         this.setState({ SelectedTopping : "" })
+        this.setState({ ToppingDetails : NO_INFO_MSG })
+        this.setState({ CupcakeFrostings : []})
+        this.setState({ CupcakeToppings : []})
+        
         var bodyFlav = SelectedBody.slice()
         bodyFlav = bodyFlav.toLowerCase().split(/[ ,]+/)[0]
         var url = LOCALHOST+":5000/api/frostingoptions/"+bodyFlav+"bodies"
         fetch(url).then((response) => {
-            console.log(response)
             response.json().then((data : any) => {
                 this.setState({
                     CupcakeFrostings : data })})})}
 
     handleFrostingChange(SelectedFrosting){
         this.setState({ SelectedFrosting })
-        this.setState({ FrostingDetails : this.infoOfSelectedFrosting(SelectedFrosting)})}
+        this.setState({ FrostingDetails : this.infoOfSelectedFrosting(SelectedFrosting)})
+
+        this.setState({ SelectedTopping : "" })
+        this.setState({ ToppingDetails : NO_INFO_MSG })
+        this.setState({ CupcakeToppings : [] })
+        
+        var toppings = this.appropriateToppingsForFrosting(SelectedFrosting)
+        for(var i=0; i<toppings.length; i++){
+            fetch("http://127.0.0.1:6500/api/toppings/"+toppings[i]).then((response) => {
+                response.json().then((data : any) => {
+                    this.setState({CupcakeToppings : this.state.CupcakeToppings.concat(data)})})})}}
 
     handleToppingChange(SelectedTopping){
-        this.setState({ SelectedTopping })}
+        this.setState({ SelectedTopping })
+        this.setState({ ToppingDetails : this.infoOfSelectedTopping(SelectedTopping)})}
 
     render() {
         return (<div className="CupcakeBodyGet">
@@ -113,10 +145,13 @@ export class CupcakeAssembler extends React.Component<undefined, CupcakeAssemble
             <hr></hr>
             <h1> Cupcake Topping Microservice </h1>
             <DropdownList value={this.state.SelectedTopping}
-                data={this.state.CupcakeToppings}
+                data={this.toNameArray(this.state.CupcakeToppings, "name")}
                 onChange={this.handleToppingChange}/>
             <b> Details </b> { this.state.ToppingDetails }
             <hr></hr>
-            <img src={this.imageUrlOfSelectedBody()} height="200" width="200"/>
-            <img src={this.imageUrlOfSelectedFrosting()} height="200" width="200"/>
+
+            <img className="parent" src={this.imageUrlOfSelectedBody()} height="200" width="200"/>
+            <img className="child2" src={this.imageUrlOfSelectedFrosting()} height="200" width="200"/>
+            <img className="child1" src={this.imageUrlOfSelectedTopping()} height="200" width="200"/>
+
           </div>)}}

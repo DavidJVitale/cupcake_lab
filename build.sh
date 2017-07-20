@@ -28,6 +28,10 @@ run_all_python_web(){
     cd flask_app
     export FLASK_APP=server.py
     flask run &
+    #Run Pyramid
+    cd $dir_of_script
+    cd pyramid_app
+    sudo python server.py &
 }
 
 # killall 3 python web framework instances
