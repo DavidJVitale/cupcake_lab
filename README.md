@@ -2,8 +2,8 @@
 
 This project chains 3 independent Python web services together in a style similar to modern web-based microservices. Each of the web instances is created using a different Python web framework: Django, Flask, and Pyramid.
 
-It also makes delicious looking cupcakes:
-![](http://i983.photobucket.com/albums/ae313/DavidJosephVitale/PythonMicroservicesCupcakes_zpsilo0mayk.gif)
+Ift also makes delicious looking cupcakes:
+![](https://raw.githubusercontent.com/DavidJVitale/python_microservices/master/pics/1.gif)
 
 ## About
 
