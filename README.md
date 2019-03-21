@@ -1,4 +1,4 @@
-# Python Microservices
+# Cupcake Lab
 
 This project chains 3 independent Python web services together in a style similar to modern web-based microservices. Each of the web instances is created using a different Python web framework: Django, Flask, and Pyramid.
 
@@ -17,7 +17,7 @@ This has enormous advantages for large-scale enterprise applications: teams aren
 * django/
     * All the django project components. This includes the HTML/CSS/Javascript, as well as the Cupcake Body endpoints
     * /react_frontend/
-        * The react-based front-end used to visualize these backend interactions. Forked from node_react_boilerplate (see DavidJVitale.com)
+        * The react-based front-end used to visualize these backend interactions. Forked from [node_react_boilerplate](https://github.com/DavidJVitale/node_react_boilerplate)
 * flask/
     * All the flask project components. This includes the Cupcake Frosting components.
 * pyramid/
